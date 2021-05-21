@@ -59,7 +59,6 @@
 )
 
 (defun url-pharo-post (body)
-  (message (format "body: %s" body))
   (url-http-post (format "http://localhost:%d/repl" pharo-repl-port) body)
 )
 

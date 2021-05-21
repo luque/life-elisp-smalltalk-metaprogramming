@@ -18,7 +18,7 @@
 ;;
 ;;; Code:
 
-(defun url-http-post (url body)
+(defun url-http-post-response (url body)
   "Send BODY to URL as a POST request."
   (let (
         (response-string nil)
@@ -34,6 +34,18 @@
           (buffer-substring-no-properties (point) (point-max)))
     (kill-buffer (current-buffer))
     response-string))
+
+(defun url-http-post (url body)
+  "Send BODY to URL as a POST request."
+  (let (
+        (url-request-method "POST")
+        (url-request-extra-headers
+         '(("Content-Type" . "text/plain")))
+        (url-request-data (encode-coding-string body 'utf-8)))
+
+        (url-retrieve-synchronously url t)
+    )
+)
 
 
 (provide 'url)

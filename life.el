@@ -142,8 +142,7 @@
 
 (defun emacs-view-setup ()
   (switch-to-buffer
-   (get-buffer-create
-    (format "*Conway's Life [%dx%d]*" width height)) t)
+   (get-buffer-create "*Conway's Life*") t)
   (life-mode)
 )
 
@@ -260,7 +259,7 @@
   (let ((expression (format "((Array2D rows: %d columns: %d element: 0) " height width)))
     (concat
      expression
-     (message "%s"
+     (format "%s"
               (mapconcat
                (lambda(cell) (format "at: %d at: %d put: 1; " (+ 1 (car cell)) (+ 1 (cadr cell))))
                generation
