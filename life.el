@@ -113,9 +113,10 @@
 (defvar height 10)
 (defconst rowHeight 20)
 (defconst columnWidth 20)
+(defconst wait-for-pharo-period 10)
 
 ;; Game functions
-(defun life (width height &optional delay)
+(defun conway (width height &optional delay)
   "Run Conway's Life simulation."
   (interactive "p")
   (setq width width)
@@ -146,6 +147,7 @@
 )
 
 (defun pharo-view-setup ()
+  (pharo-setup)
   (new-morph "LifeMorph" "Life" '("columns" "rows" "contents") '())
   (add-class-method
    "LifeMorph"
@@ -200,6 +202,13 @@
 	^ self"
    "drawing")
   (open-view-in-pharo)
+)
+
+(defun pharo-setup ()
+  (setup-pharo-environment)
+  (load-repl-server)
+  (launch-pharo-repl)
+  (sit-for wait-for-pharo-period t)
 )
 
 (defun open-view-in-pharo ()
