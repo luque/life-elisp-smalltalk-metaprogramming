@@ -1,14 +1,13 @@
 ;;; pharo.el --- Description -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2021 John Doe
+;; Copyright (C) 2021 Rafael Luque
 ;;
-;; Author: John Doe <https://github.com/rzamo>
-;; Maintainer: John Doe <john@doe.com>
+;; Author: Rafael Luque <https://github.com/luque>
 ;; Created: May 11, 2021
 ;; Modified: May 11, 2021
 ;; Version: 0.0.1
 ;; Keywords: Symbol’s value as variable is void: finder-known-keywords
-;; Homepage: https://github.com/rzamo/pharo
+;; Homepage: https://github.com/luque/life-elisp-smalltalk
 ;; Package-Requires: ((emacs "24.3"))
 ;;
 ;; This file is not part of GNU Emacs.
@@ -21,6 +20,7 @@
 (require 'url)
 
 (defconst default-repl-port 1701)
+(defconst author-full-name-default "Emacs Lisp")
 (defconst class-template "
         %s subclass: #%s
         instanceVariableNames: '%s'
@@ -67,15 +67,23 @@
   (url-pharo-post expression)
 )
 
+(defun set-author (&optional author-full-name)
+  (let ((full-name (or author-full-name author-full-name-default)))
+    (eval-pharo (format "Author uniqueInstance fullName: '%s'" full-name))
+  )
+)
+
 (defun new-class (superclass name package instanceVariablesList classVariablesList)
   (let ((instanceVariables (mapconcat 'identity instanceVariablesList " "))
         (classVariables (mapconcat 'identity classVariablesList " ")))
+    (set-author)
     (eval-pharo (format class-template superclass name instanceVariables classVariables package))
     )
 )
 
 (defun new-morph (name package instanceVariablesList classVariablesList)
-  (new-class "Morph" name package instanceVariablesList classVariablesList))
+  (new-class "Morph" name package instanceVariablesList classVariablesList)
+)
 
 (defun add-method (class name body classifier)
   (eval-pharo (format compile-method-template class name body classifier)))

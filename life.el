@@ -1,6 +1,6 @@
 ;;; life.el --- Description -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2021 Rafael Luque Leiva
+;; Copyright (C) 2021 Rafael Luque
 ;;
 ;; Author: Rafael Luque <https://github.com/luque>
 ;; Maintainer: Rafael Luque
@@ -113,7 +113,8 @@
 (defvar height 10)
 (defconst rowHeight 20)
 (defconst columnWidth 20)
-(defconst wait-for-pharo-period 10)
+(defconst default-delay 0.5)
+(defconst wait-for-pharo-period 2)
 
 ;; Game functions
 (defun conway (width height &optional delay)
@@ -121,7 +122,7 @@
   (interactive "p")
   (setq width width)
   (setq height width)
-  (or delay (setq delay 1))
+  (or delay (setq delay default-delay))
   (life-setup)
   (while t
       (render-generation)
@@ -142,7 +143,7 @@
 (defun emacs-view-setup ()
   (switch-to-buffer
    (get-buffer-create
-    (format "*Conway's Life [%dx%d]*" width height)))
+    (format "*Conway's Life [%dx%d]*" width height)) t)
   (life-mode)
 )
 
@@ -229,6 +230,7 @@
 (define-derived-mode life-mode special-mode "Life"
   "Major mode for the buffer of `life'."
   (setq-local show-trailing-whitespace nil)
+  (setq-local truncate-lines t)
   (buffer-disable-undo))
 
 (defun render-generation ()

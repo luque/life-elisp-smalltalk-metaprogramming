@@ -1,14 +1,13 @@
 ;;; url.el --- Description -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2021 John Doe
+;; Copyright (C) 2021 Rafael Luque
 ;;
-;; Author: John Doe <https://github.com/rzamo>
-;; Maintainer: John Doe <john@doe.com>
+;; Author: Rafael Luque <https://github.com/luque>
 ;; Created: May 11, 2021
 ;; Modified: May 11, 2021
 ;; Version: 0.0.1
 ;; Keywords: Symbol’s value as variable is void: finder-known-keywords
-;; Homepage: https://github.com/rzamo/url
+;; Homepage: https://github.com/luque/life-elisp-smalltalk
 ;; Package-Requires: ((emacs "24.3"))
 ;;
 ;; This file is not part of GNU Emacs.
