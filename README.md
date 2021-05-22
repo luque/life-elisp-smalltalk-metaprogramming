@@ -1,4 +1,4 @@
-# life-elisp-smalltalk-metaprogramming
+# Conway's Life with Emacs Lisp and Smalltalk
 
 A simple experiment to play with the interoperability at the meta level between Lisp (Emacs Lisp dialect) and Smalltalk (Pharo Smalltalk).
 
